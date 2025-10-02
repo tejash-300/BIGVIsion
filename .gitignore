@@ -45,10 +45,11 @@ data/UCF101.rar
 data/youtube_test/*.mp4
 data/youtube_test/*.avi
 
-# Models - Keep best checkpoints in repo, but ignore if too large for your git host
-# Uncomment the next two lines if you want to exclude models from git
-# models/*.pth
-# models/*.pt
+# Models - Excluded due to GitHub 100MB file size limit
+# Model checkpoints are ~988MB each (too large for GitHub)
+# Download models separately or use Git LFS
+models/*.pth
+models/*.pt
 !models/.gitkeep
 
 # Outputs
