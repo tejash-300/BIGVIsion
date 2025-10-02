@@ -1,0 +1,86 @@
+# Video Classification Project Requirements
+# ==========================================
+
+# Core Deep Learning Frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+transformers>=4.35.0
+timm>=0.9.0
+peft>=0.7.0  # For LoRA (Parameter-Efficient Fine-Tuning)
+
+# Video Processing
+opencv-python>=4.8.0
+opencv-contrib-python>=4.8.0
+decord>=0.6.0
+av>=10.0.0
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.9
+moviepy>=1.0.3
+
+# Data Processing and Augmentation
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+albumentations>=1.3.0
+imgaug>=0.4.0
+
+# Visualization and Plotting
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.17.0
+opencv-python>=4.8.0
+
+# Progress and Logging
+tqdm>=4.65.0
+tensorboard>=2.14.0
+wandb>=0.15.0
+
+# Configuration Management
+pyyaml>=6.0
+omegaconf>=2.3.0
+python-dotenv>=1.0.0
+
+# Metrics and Evaluation
+torchmetrics>=1.0.0
+scikit-metrics>=0.1.0
+
+# Model Optimization and Deployment
+onnx>=1.14.0
+onnxruntime>=1.16.0
+
+# Jupyter and Interactive Development
+jupyter>=1.0.0
+ipywidgets>=8.1.0
+notebook>=7.0.0
+jupyterlab>=4.0.0
+
+# Utilities
+einops>=0.7.0  # For tensor operations
+pytorchvideo>=0.1.5  # Facebook's video understanding library
+fvcore>=0.1.5  # For model analysis
+
+# GPU Acceleration (Optional but recommended)
+# Install based on your CUDA version
+# For CUDA 11.8:
+# torch>=2.0.0+cu118
+# torchvision>=0.15.0+cu118
+
+# Additional Utilities
+rich>=13.0.0  # For beautiful terminal output
+colorama>=0.4.6
+pillow>=10.0.0
+scipy>=1.11.0
+
+# Video-specific transformers
+# pytorchvideo  # Already included above
+
+# Optional: For advanced features
+# apex  # For mixed precision training (requires manual installation)
+# fairscale>=0.4.13  # For model parallelism
+
+# Development Tools (Optional)
+black>=23.0.0  # Code formatting
+flake8>=6.0.0  # Linting
+pytest>=7.4.0  # Testing
+

@@ -1,0 +1,9 @@
+{
+  "class_names": [
+    "HorseRiding",
+    "PoleVault",
+    "LongJump",
+    "JavelinThrow",
+    "Skiing"
+  ]
+}

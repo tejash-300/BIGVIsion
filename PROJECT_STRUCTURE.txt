@@ -1,0 +1,105 @@
+VIDEO CLASSIFICATION PROJECT STRUCTURE
+======================================
+
+video-classification-project/
+│
+├── 📁 configs/
+│   └── config.yaml                  # Main configuration file
+│
+├── 📁 data/
+│   ├── raw/                         # Original video files
+│   ├── processed/                   # Preprocessed data (optional)
+│   └── splits/                      # Train/val/test split files
+│       ├── train.json
+│       ├── val.json
+│       ├── test.json
+│       └── class_names.json
+│
+├── 📁 models/                       # Saved model checkpoints
+│   ├── best_model.pth
+│   └── checkpoint_epoch_*.pth
+│
+├── 📁 notebooks/                    # Jupyter notebooks (MAIN SCRIPTS)
+│   ├── 01_data_preprocessing_and_exploration.ipynb
+│   ├── 02_model_training.ipynb
+│   ├── 03_evaluation_and_visualization.ipynb
+│   └── 04_inference_and_prediction.ipynb
+│
+├── 📁 utils/                        # Utility modules
+│   ├── __init__.py
+│   ├── data_utils.py               # Data loading & preprocessing
+│   ├── model_utils.py              # Model creation & management
+│   ├── training_utils.py           # Training & evaluation functions
+│   └── visualization_utils.py      # Plotting & visualization
+│
+├── 📁 outputs/
+│   ├── logs/                       # Training logs & TensorBoard
+│   ├── visualizations/             # Generated plots & figures
+│   │   ├── training_history.png
+│   │   ├── confusion_matrix.png
+│   │   └── per_class_metrics.png
+│   └── predictions/                # Prediction results
+│       ├── predictions.json
+│       └── predictions.csv
+│
+├── 📄 requirements.txt              # Python dependencies
+├── 📄 README.md                     # Comprehensive documentation
+├── 📄 QUICKSTART.md                # Quick start guide
+└── 📄 PROJECT_STRUCTURE.txt        # This file
+
+KEY FILES DESCRIPTION
+=====================
+
+CONFIGURATION:
+- config.yaml: All project settings (model, training, data, etc.)
+
+NOTEBOOKS (Execute in Order):
+1. Data Preprocessing: Load data, create splits, visualize
+2. Model Training: Train VideoMAE/TimeSformer with monitoring
+3. Evaluation: Test performance, confusion matrix, metrics
+4. Inference: Make predictions on new videos
+
+UTILITIES:
+- data_utils.py: VideoDataset class, data loaders, preprocessing
+- model_utils.py: Model creation, checkpoint management
+- training_utils.py: Training loops, metrics, evaluation
+- visualization_utils.py: Plotting functions for results
+
+FEATURES
+========
+✅ State-of-the-art models (VideoMAE, TimeSformer, I3D)
+✅ Mixed precision training (FP16)
+✅ Data augmentation pipeline
+✅ Comprehensive evaluation metrics
+✅ Beautiful visualizations
+✅ Export predictions (JSON/CSV)
+✅ Real-time webcam inference
+✅ Production-ready code
+
+WORKFLOW
+========
+1. Configure (config.yaml)
+2. Prepare data (Notebook 01)
+3. Train model (Notebook 02)
+4. Evaluate (Notebook 03)
+5. Deploy (Notebook 04)
+
+SUPPORTED MODELS
+================
+- VideoMAE: Masked Autoencoding for Videos
+- TimeSformer: Divided Space-Time Attention
+- I3D: Inflated 3D ConvNets
+
+DATASET
+=======
+Default: UCF101 (101 action classes, 13K videos)
+Custom: Any video classification dataset
+
+REQUIREMENTS
+============
+- Python 3.8+
+- PyTorch 2.0+
+- transformers, timm
+- opencv, decord
+- See requirements.txt for complete list
+

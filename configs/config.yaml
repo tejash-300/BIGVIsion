@@ -1,0 +1,184 @@
+# Video Classification Project Configuration
+# ============================================
+
+# Dataset Configuration
+dataset:
+  name: "UCF101_5_Classes"
+  root_dir: "./data/UCF-101"
+  processed_dir: "./data/processed"
+  splits_dir: "./data/splits"
+  num_classes: 5  # Only 5 classes for assignment
+  classes: ["HorseRiding", "PoleVault", "LongJump", "JavelinThrow", "Skiing"]
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  
+# Video Processing
+video:
+  fps: 30
+  num_frames: 16  # Number of frames to sample from each video
+  frame_size: [224, 224]  # [height, width]
+  sampling_strategy: "uniform"  # uniform, random, dense
+  
+# Data Augmentation
+augmentation:
+  train:
+    random_crop: true
+    horizontal_flip: true
+    color_jitter: true
+    rotation_range: 15
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+  val:
+    center_crop: true
+  test:
+    center_crop: true
+
+# Model Configuration
+model:
+  name: "videomae"  # Options: videomae, timesformer, vivit, i3d
+  pretrained: true
+  pretrained_path: null  # Path to custom pretrained weights
+  
+  # LoRA Configuration (Parameter-Efficient Fine-Tuning)
+  use_lora: true  # Enable LoRA for faster training and lower memory
+  lora:
+    r: 8  # Rank of LoRA matrices (higher = more parameters, better performance)
+    lora_alpha: 16  # Scaling factor
+    lora_dropout: 0.1
+    target_modules: ["query", "value"]  # Apply LoRA to attention Q&V matrices
+    bias: "none"  # none, all, lora_only
+  
+  # VideoMAE specific
+  videomae:
+    patch_size: 16
+    embed_dim: 768
+    depth: 12
+    num_heads: 12
+    mlp_ratio: 4.0
+    dropout: 0.1
+    attention_dropout: 0.1
+    drop_path_rate: 0.1
+  
+  # TimeSformer specific
+  timesformer:
+    patch_size: 16
+    embed_dim: 768
+    depth: 12
+    num_heads: 12
+    attention_type: "divided_space_time"  # divided_space_time, space_only, joint_space_time
+    dropout: 0.1
+
+# Training Configuration
+training:
+  batch_size: 8
+  num_epochs: 50  # Reduced for 5 classes
+  num_workers: 4
+  pin_memory: true
+  
+  # Optimizer
+  optimizer:
+    name: "adamw"  # adam, adamw, sgd
+    lr: 0.0001
+    weight_decay: 0.05
+    betas: [0.9, 0.999]
+    momentum: 0.9  # for SGD
+    
+  # Learning Rate Scheduler
+  scheduler:
+    name: "cosine"  # cosine, step, reduce_on_plateau, exponential
+    warmup_epochs: 5
+    warmup_lr: 0.000001
+    min_lr: 0.000001
+    # For step scheduler
+    step_size: 30
+    gamma: 0.1
+    # For reduce on plateau
+    patience: 10
+    factor: 0.5
+  
+  # Mixed Precision Training
+  mixed_precision: true
+  gradient_clip: 1.0
+  
+  # Early Stopping
+  early_stopping:
+    enabled: true
+    patience: 15
+    min_delta: 0.001
+  
+  # Checkpointing
+  checkpoint:
+    save_freq: 5  # Save every N epochs
+    save_best: true
+    metric: "val_accuracy"  # Metric to monitor for best model
+    mode: "max"  # max or min
+
+# Evaluation Configuration
+evaluation:
+  batch_size: 16
+  metrics:
+    - accuracy
+    - top5_accuracy
+    - f1_score
+    - precision
+    - recall
+    - confusion_matrix
+  
+  # Test Time Augmentation
+  tta:
+    enabled: false
+    num_augmentations: 5
+
+# Inference Configuration
+inference:
+  batch_size: 8
+  confidence_threshold: 0.5
+  output_format: "json"  # json, csv
+
+# Logging and Visualization
+logging:
+  log_dir: "./outputs/logs"
+  tensorboard: true
+  wandb:
+    enabled: false
+    project_name: "video-classification"
+    entity: null
+  
+  # What to log
+  log_interval: 10  # Log every N batches
+  log_gradients: false
+  log_learning_rate: true
+  log_images: true
+  num_images_log: 4
+
+# Output Configuration
+output:
+  models_dir: "./models"
+  visualizations_dir: "./outputs/visualizations"
+  predictions_dir: "./outputs/predictions"
+
+# Hardware Configuration
+hardware:
+  device: "cuda"  # cuda, cpu, mps
+  gpu_ids: [0]  # List of GPU IDs to use
+  distributed: false
+  
+# Reproducibility
+seed: 42
+
+# Advanced Options
+advanced:
+  gradient_accumulation_steps: 1
+  label_smoothing: 0.1
+  mixup_alpha: 0.2  # Set to 0 to disable
+  cutmix_alpha: 0.0  # Set to 0 to disable
+  
+  # Knowledge Distillation
+  distillation:
+    enabled: false
+    teacher_model_path: null
+    temperature: 4.0
+    alpha: 0.5  # Balance between distillation and hard label loss
+
