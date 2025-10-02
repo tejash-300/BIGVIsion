@@ -45,11 +45,8 @@ data/UCF101.rar
 data/youtube_test/*.mp4
 data/youtube_test/*.avi
 
-# Models - Excluded due to GitHub 100MB file size limit
-# Model checkpoints are ~988MB each (too large for GitHub)
-# Download models separately or use Git LFS
-models/*.pth
-models/*.pt
+# Models - Tracked with Git LFS (Large File Storage)
+# Model checkpoints are stored in Git LFS due to size (~988MB each)
 !models/.gitkeep
 
 # Outputs
